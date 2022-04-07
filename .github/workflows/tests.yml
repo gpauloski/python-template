@@ -1,0 +1,41 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+    tags:
+  pull_request:
+
+jobs:
+  tests:
+
+    strategy:
+      matrix:
+        include:
+        - os: ubuntu-latest
+          python: 3.7
+          toxenv: py37
+        - os: ubuntu-latest
+          python: 3.8
+          toxenv: py38
+        - os: ubuntu-latest
+          python: 3.9
+          toxenv: py39
+        - os: ubuntu-latest
+          python: '3.10'
+          toxenv: py310
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{matrix.python}}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install Packages
+        run: python -mpip install --upgrade setuptools pip tox virtualenv
+
+      - name: Run Tox
+        run: tox -e ${{ matrix.toxenv }}
