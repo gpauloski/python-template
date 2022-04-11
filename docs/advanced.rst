@@ -4,7 +4,7 @@ Advanced
 foobar
 ======
 
-foobar can be used as folows.
+foobar can be used as follows.
 
 .. code-block:: python
 
