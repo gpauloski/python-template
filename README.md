@@ -2,7 +2,14 @@
 
 <!-- REPLACE THE FOLLOWING LINKS WITH YOUR USERNAME/PROJECT NAME -->
 [![Tests](https://github.com/gpauloski/python-template/actions/workflows/tests.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
+<!--
+pre-commit.ci badge can be found on pre-commit.ci after you enable
+precommit for you repo.
+-->
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gpauloski/python-template/main.svg)](https://results.pre-commit.ci/latest/github/gpauloski/python-template/main)
+<!-- OPTIONAL GITHUB ACTIONS PRE-COMMIT IF NOT USING PRE-COMMIT.CI
 [![Style](https://github.com/gpauloski/python-template/actions/workflows/style.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
+-->
 <!-- REPLACE READTHEDOCS LINK AND UNCOMMENT IF NEEDED
 [![Docs](https://readthedocs.org/projects/foobar/badge/?version=latest)](https://foobar.readthedocs.io/en/latest/?badge=latest)
 -->

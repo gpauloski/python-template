@@ -1,3 +1,6 @@
+# GitHub workflow for running pre-commit in GitHub actions
+# rather than via pre-commit.ci (pre-commit.ci is recommended because it
+# is faster).
 name: style
 
 on: [push, pull_request]
