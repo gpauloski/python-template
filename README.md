@@ -3,7 +3,7 @@
 <!-- REPLACE THE FOLLOWING LINKS WITH THE CORRECT ONES
 - pre-commit.ci badge can be found on pre-commit.ci after you enable precommit for you repo.
 - Alternatively, GitHub actions can be used to run pre-commit in CI by removing the '.disabled' from `.github/workflows/style.yml.disabled` and uncommenting the badge below.
-- RTDs badge can be found on readthedocs.org after enabling RTD for your repo.
+- RTDs badge can be found on readthedocs.org after enabling RTD for your repo. 
 -->
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gpauloski/python-template/main.svg)](https://results.pre-commit.ci/latest/github/gpauloski/python-template/main)
 [![Docs](https://github.com/gpauloski/python-template/actions/workflows/docs.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
