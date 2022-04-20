@@ -1,6 +1,5 @@
 name: Enhancement Request
 description: Request a new feature or enhancement.
-title: "[ENH] "
 labels: ["enhancement"]
 assignees:
   - foobar-enh-assign-dev
