@@ -54,3 +54,5 @@ repos:
     rev: v0.961
     hooks:
     -   id: mypy
+        # Add any additional typed package dependencies here
+        additional_dependencies: []
