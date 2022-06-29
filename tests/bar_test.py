@@ -21,4 +21,6 @@ def test_bar_none_input() -> None:
 )
 def test_bar_sum(data: list[int], total: int) -> None:
     assert bar(data) == total
-    assert bar(DATA['input']) == DATA['total']
+
+    d = DATA[0]
+    assert bar(d[0]) == d[1]
