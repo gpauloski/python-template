@@ -40,14 +40,14 @@ def skip(
 
 
 def setup(app: Any) -> None:
-    """Setup sphinx docs."""
+    """Sphinx docs setup."""
     app.connect('autodoc-skip-member', skip)
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'foobar'
-copyright = '20XX, foobar author'
+copyright = '20XX, foobar author'  # noqa: A001
 author = 'foobar author'
 
 # The full version, including alpha/beta/rc tags
