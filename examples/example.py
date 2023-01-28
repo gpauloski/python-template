@@ -1,3 +1,4 @@
+"""Example script that uses the foobar package."""
 from __future__ import annotations
 
 import argparse
@@ -6,6 +7,7 @@ from foobar.foo import bar
 
 
 def main() -> int:
+    """Script entry point."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-n',
