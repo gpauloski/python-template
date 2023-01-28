@@ -21,22 +21,22 @@ This package setup was based on [Anthony Sottile's project setup](https://www.yo
 
 ## Setup Instructions
 
-#. Click the "Use this template" button at the top right of this page.
-#. Delete and directories you will not be using (commonly `docs/` if you do not want to use ReadTheDocs or `examples/` if you will not have example code).
-#. Follow the instructions to create the new repo then clone your repo locally.
-#. The template uses "foobar" to indicate things that need to be changed.
+1. Click the "Use this template" button at the top right of this page.
+2. Delete and directories you will not be using (commonly `docs/` if you do not want to use ReadTheDocs or `examples/` if you will not have example code).
+3. Follow the instructions to create the new repo then clone your repo locally.
+4. The template uses "foobar" to indicate things that need to be changed.
    Start by searching for all instances (`git grep foobar`) and changing them accordingly.
-#. Configure pre-commit:
+5. Configure pre-commit:
    - Go to [https://pre-commit.ci/](https://pre-commit.ci/) and enable pre-commit on your repo.
    - Update the pre-commit badge URL in this README with your new badge URL.
-#. Configure ReadTheDocs (if relevant):
+6. Configure ReadTheDocs (if relevant):
    - Go to [https://readthedocs.org/](https://readthedocs.org/) and import this repo as a new project.
    - Update the ReadTheDocs badge URL in this README with your new badge URL.
-#. Configure PyPI releases (if relevant):
+7. Configure PyPI releases (if relevant):
    - Create a new API token for [https://pypi.org/](https://pypi.org/).
    - Add the token as a GitHub actions secret (see the instructions [here](https://github.com/pypa/gh-action-pypi-publish)).
-#. Delete this boilerplate stuff in the README.
-#. Commit and push changes.
+8. Delete this boilerplate stuff in the README.
+9. Commit and push changes.
 
 ### GitHub Configuration
 
