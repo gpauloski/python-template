@@ -6,7 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "foobar"
 version = "0.0.1"
 authors = [
-    {name = "foobar author", email = "foobar@foobar.com"},
+    {name = "foobar author"},
+    {email = "foobar@foobar.com"},
 ]
 description = "Foobar example package."
 readme = "README.md"
@@ -24,8 +25,9 @@ dependencies = [
 ]
 
 [project.urls]
-repository = "https://github.com/foobar-author/foobar"
+homepage = "https://github.com/foobar-author/foobar"
 documentation = "https://foobar.readthedocs.io"
+repository = "https://github.com/foobar-author/foobar"
 
 [project.optional-dependencies]
 dev = [
