@@ -12,7 +12,7 @@ def test_bar_none_input() -> None:
 
 
 @pytest.mark.parametrize(
-    'data,total',
+    ('data', 'total'),
     (
         ([1], 1),
         ([1, 2], 3),
