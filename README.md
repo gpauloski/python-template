@@ -1,19 +1,13 @@
 # Python Package Template Repo
 
-<!-- REPLACE THE FOLLOWING LINKS WITH THE CORRECT ONES
-- pre-commit.ci badge can be found on pre-commit.ci after you enable precommit for you repo.
-- RTDs badge can be found on readthedocs.org after enabling RTD for your repo.
--->
+[![docs](https://github.com/gpauloski/python-template/actions/workflows/docs.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
+[![tests](https://github.com/gpauloski/python-template/actions/workflows/tests.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gpauloski/python-template/main.svg)](https://results.pre-commit.ci/latest/github/gpauloski/python-template/main)
-[![Tests](https://github.com/gpauloski/python-template/actions/workflows/tests.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
-<!--
-[![Docs](https://readthedocs.org/projects/foobar/badge/?version=latest)](https://foobar.readthedocs.io/en/latest/?badge=latest)
--->
 
 Python package template repo that provides:
 - Package, examples, and testing layout.
 - GitHub PR and Issue templates.
-- Example docs with ReadTheDocs.
+- Example docs with MKDocs and GitHub Pages.
 - CI framework with `pre-commit` and `tox`.
 - GitHub actions for running tests and publishing packages.
 
@@ -22,19 +16,19 @@ This package setup was based on [Anthony Sottile's project setup](https://www.yo
 ## Setup Instructions
 
 1. Click the "Use this template" button at the top right of this page.
-2. Delete and directories you will not be using (commonly `docs/` if you do not want to use ReadTheDocs or `examples/` if you will not have example code).
+2. Delete and directories you will not be using (commonly `docs/` if you do not want to use MKDocs or `examples/` if you will not have example code).
 3. Follow the instructions to create the new repo then clone your repo locally.
 4. The template uses "foobar" to indicate things that need to be changed.
    Start by searching for all instances (`git grep foobar`) and changing them accordingly.
 5. Configure pre-commit:
-   - Go to [https://pre-commit.ci/](https://pre-commit.ci/) and enable pre-commit on your repo.
-   - Update the pre-commit badge URL in this README with your new badge URL.
-6. Configure ReadTheDocs (if relevant):
-   - Go to [https://readthedocs.org/](https://readthedocs.org/) and import this repo as a new project.
-   - Update the ReadTheDocs badge URL in this README with your new badge URL.
+    - Go to [https://pre-commit.ci/](https://pre-commit.ci/) and enable pre-commit on your repo.
+    - Update the pre-commit badge URL in this README with your new badge URL.
+6. Configure GitHub pages:
+    - Go to the "Pages" section of your repository settings.
+    - Select "Deploy from a branch" and use the "gh-pages" branch.
 7. Configure PyPI releases (if relevant):
-   - Create a new API token for [https://pypi.org/](https://pypi.org/).
-   - Add the token as a GitHub actions secret (see the instructions [here](https://github.com/pypa/gh-action-pypi-publish)).
+    - Create a new API token for [https://pypi.org/](https://pypi.org/).
+    - Add the token as a GitHub actions secret (see the instructions [here](https://github.com/pypa/gh-action-pypi-publish)).
 8. Delete this boilerplate stuff in the README.
 9. Commit and push changes.
 

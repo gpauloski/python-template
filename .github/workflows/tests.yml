@@ -49,9 +49,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.PIP_CACHE_DIR }}
-          key: ${{ matrix.os }}-pip-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
+          key: tests-${{ matrix.os }}-pip-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: |
-            ${{ matrix.os }}-pip-${{ matrix.python }}-
+            tests-${{ matrix.os }}-pip-${{ matrix.python }}-
 
       - name: Install Packages
         run: python -mpip install --upgrade pip tox
