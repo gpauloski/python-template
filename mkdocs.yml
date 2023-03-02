@@ -1,15 +1,12 @@
-site_name: ProxyStore
-site_url: https://proxystore.dev
+site_name: Python Template
+site_url: https://gpauloski.github.io/python-template
 site_author: FooBar Author
 site_description: Documentation for FooBar.
 
 repo_name: gpauloski/python-template
 repo_url: https://github.com/gpauloski/python-template
 
-edit_uri: blob/main/docs/
-
 copyright: Copyright &copy; 2023—Present FooBar Authors
-
 
 theme:
   name: material
@@ -71,6 +68,9 @@ extra:
     default: latest
     provider: mike
 
+extra_css:
+  - css/mkdocstrings.css
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -90,8 +90,8 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.magiclink:
       repo_url_shorthand: true
-      user: proxystore
-      repo: proxystore
+      user: foobar-author
+      repo: foobar
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.snippets:
@@ -108,14 +108,17 @@ nav:
       - Installation: installation.md
       - Get Started: get-started.md
       - Examples: examples.md
-      - Changelog: https://github.com/gpauloski/python-template/releases
+      - Known Issues: known-issues.md
+      - Changelog (GitHub): https://github.com/gpauloski/python-template/releases
   - Guides:
       - guides/index.md
       - Example: guides/example.md
-  - Contributing: contributing.md
-  - API Reference:
-      - FooBar: reference/
-      - Known Issues: known-issues.md
+  - API Reference: api/
+  - Contributing:
+      - contributing/index.md
+      - Style Guide: contributing/style-guide.md
+      - Issues and Pull Requests: contributing/issues-pull-requests.md
+      - Releases: contributing/releases.md
 
 plugins:
   - gen-files:
@@ -124,6 +127,8 @@ plugins:
   - literate-nav:
       nav_file: SUMMARY.md
   - mkdocstrings:
+      custom_templates: docs/_templates
+      enable_inventory: true
       handlers:
         python:
           setup_commands:
