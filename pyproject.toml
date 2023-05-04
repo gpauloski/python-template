@@ -123,6 +123,8 @@ select = [
     "Q",
     # flake8-debugger
     "T10",
+    # PyLint
+    "PL",
     # ruff-specific
     "RUF",
 ]
