@@ -11,7 +11,7 @@ authors = [
 ]
 description = "Foobar example package."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = {text = "MIT"}
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -21,7 +21,6 @@ classifiers = [
 ]
 dependencies = [
     "requests",
-    "importlib-metadata; python_version<'3.8'",
 ]
 
 [project.urls]
@@ -54,7 +53,7 @@ docs = [
 
 [tool.black]
 line-length = 79
-target-version = ["py37"]
+target-version = ["py38"]
 skip-string-normalization = true
 
 [tool.codespell]
@@ -129,7 +128,7 @@ select = [
     "RUF",
 ]
 extend-ignore = []
-target-version = "py37"
+target-version = "py38"
 
 [tool.ruff.flake8-pytest-style]
 parametrize-values-type = "tuple"
