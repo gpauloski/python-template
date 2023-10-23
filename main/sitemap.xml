@@ -2,72 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://gpauloski.github.io/python-template/main/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/examples/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/get-started/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/installation/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/known-issues/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/api/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/api/SUMMARY/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/api/foo/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/contributing/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/contributing/issues-pull-requests/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/contributing/releases/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/contributing/style-guide/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/guides/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://gpauloski.github.io/python-template/main/guides/example/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-10-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
