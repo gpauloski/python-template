@@ -28,7 +28,7 @@ N/A
 
 Please confirm the PR meets the following requirements.
 - [ ] Relevant tags are added (breaking, bug, dependencies, documentation, enhancement, refactor).
-- [ ] Code changes pass `pre-commit` (e.g., black, ruff, mypy, etc.).
+- [ ] Code changes pass `pre-commit` (e.g., ruff, mypy, etc.).
 - [ ] Tests have been added to show the fix is effective or that the new feature works.
 - [ ] New and existing unit tests pass locally with the changes.
 - [ ] Docs have been updated and reviewed if relevant.
