@@ -30,7 +30,6 @@ repository = "https://github.com/foobar-author/foobar"
 
 [project.optional-dependencies]
 dev = [
-    "black",
     "covdefaults>=2.2",
     "coverage",
     "mypy",
@@ -50,11 +49,6 @@ docs = [
     "mkdocstrings[python]",
     "mike",
 ]
-
-[tool.black]
-line-length = 79
-target-version = ["py38"]
-skip-string-normalization = true
 
 [tool.codespell]
 skip = """
@@ -127,6 +121,7 @@ select = [
     # ruff-specific
     "RUF",
 ]
+line-length = 79
 extend-ignore = []
 target-version = "py38"
 
@@ -136,6 +131,10 @@ parametrize-values-type = "tuple"
 [tool.ruff.flake8-quotes]
 inline-quotes = "single"
 multiline-quotes = "single"
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "single"
 
 [tool.ruff.isort]
 force-single-line = true
