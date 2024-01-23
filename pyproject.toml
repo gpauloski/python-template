@@ -93,6 +93,8 @@ select = [
     "F",
     # pycodestyle
     "E",
+    # mccabe
+    "C90",
     # isort
     "I",
     # pep8-naming
@@ -101,6 +103,8 @@ select = [
     "D",
     # pyupgrade
     "UP",
+    # flake8-2020
+    "YTT",
     # flake8-bugbear
     "B",
     # flake8-builtins
@@ -117,6 +121,8 @@ select = [
     "Q",
     # flake8-debugger
     "T10",
+    # flake8-simplify
+    "SIM",
     # PyLint
     "PL",
     # ruff-specific
