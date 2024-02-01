@@ -46,4 +46,4 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy docs for main:latest to gh-pages branch
         run: |
-          mike deploy --push --update-aliases main latest
+          mike deploy --push --update-aliases main
