@@ -54,7 +54,7 @@ $ pip install foobar
 
 For local development:
 ```
-$ tox --devenv venv -e py 310
+$ tox --devenv venv -e py310
 $ pre-commit install
 ```
 or
