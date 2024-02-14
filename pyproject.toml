@@ -36,7 +36,7 @@ dev = [
     "pre-commit",
     "pytest",
     "pytest-cov",
-    "ruff",
+    "ruff>=0.2.0",
     "tox",
     "virtualenv",
 ]
@@ -87,6 +87,14 @@ allow_incomplete_defs = true
 allow_untyped_defs = true
 
 [tool.ruff]
+line-length = 79
+target-version = "py38"
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "single"
+
+[tool.ruff.lint]
 # See all rules here: https://beta.ruff.rs/docs/rules
 select = [
     # pyflakes
@@ -128,32 +136,26 @@ select = [
     # ruff-specific
     "RUF",
 ]
-line-length = 79
 extend-ignore = []
-target-version = "py38"
 
-[tool.ruff.flake8-pytest-style]
+[tool.ruff.lint.flake8-pytest-style]
 parametrize-values-type = "tuple"
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 inline-quotes = "single"
 multiline-quotes = "single"
 
-[tool.ruff.format]
-indent-style = "space"
-quote-style = "single"
-
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 force-single-line = true
 known-first-party = ["foobar", "test", "testing"]
 order-by-type = false
 required-imports = ["from __future__ import annotations"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "*/__init__.py" = ["F401"]
 "*/*_test.py" = ["D10"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.setuptools.packages.find]
