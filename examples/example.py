@@ -1,4 +1,5 @@
 """Example script that uses the foobar package."""
+
 from __future__ import annotations
 
 import argparse
