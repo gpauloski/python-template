@@ -11,7 +11,7 @@ authors = [
 ]
 description = "Foobar example package."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {text = "MIT"}
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -67,7 +67,7 @@ plugins = ["covdefaults"]
 omit = ["examples"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.12"
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
@@ -89,7 +89,7 @@ allow_untyped_defs = true
 
 [tool.ruff]
 line-length = 79
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.format]
 indent-style = "space"
