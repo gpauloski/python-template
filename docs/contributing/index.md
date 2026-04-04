@@ -16,8 +16,8 @@ $ . venv/bin/activate
 
     Running Tox in a Conda environment is possible but it may conflict with
     Tox's ability to find the correct Python versions. E.g., if your
-    Conda environment is Python 3.9, running `#!bash $ tox -e p38` may still use
-    Python 3.9.
+    Conda environment is Python 3.13, running `#!bash $ tox -e p312` may still use
+    Python 3.13.
 
 To install manually:
 ```bash
@@ -61,9 +61,9 @@ Code that is useful for building tests but is not a test itself belongs in the
 
 ```bash
 # Run all tests in tests/
-$ tox -e py39
+$ tox -e py313
 # Run a specific test
-$ tox -e py39 -- tests/x/y_test.py::test_z
+$ tox -e py313 -- tests/x/y_test.py::test_z
 ```
 
 ## Docs
