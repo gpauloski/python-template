@@ -10,15 +10,12 @@ Milestones are the [Issue Tracker](https://github.com/foobar-author/foobar/issue
    (`major.minor.patch`) with optional [PEP-440](https://peps.python.org/pep-0440){target=_blank}
    pre-release/post-release/dev-release segments. Major/minor/patch numbers
    start at 0 and pre-release/post-release/dev-release segments start at 1.
-2. Update the version in `pyproject.toml` to `{VERSION}`.
-3. Commit and merge the version updates/changelogs into main.
-4. Tag the release commit and push (typically this is the commit updating the
-   version numbers).
+1. Tag the release commit and push.
    ```bash
    $ git tag -s v{VERSION} -m "FooBar v{VERSION}"
    $ git push origin v{VERSION}
    ```
-   Note the version number is prepended by "v" for the tags so we can
+   Note the version number is prepended by "v" for the tags so tooling can
    distinguish release tags from non-release tags.
 5. Create a new release on GitHub using the tag. The title should be
    `FooBar v{VERSION}`.
