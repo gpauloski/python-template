@@ -1,20 +1,19 @@
 [build-system]
-requires = ["setuptools>=64.0", "setuptools_scm"]
+requires = ["setuptools>=77.0", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "foobar"
-version = "0.1.0"
 authors = [
-    {name = "foobar author"},
-    {email = "foobar@foobar.com"},
+    {name = "foobar author", email = "foobar@foobar.com"},
 ]
-description = "Foobar example package."
+description = "Foobar example package"
+dynamic = ["version"]
 readme = "README.md"
-requires-python = ">=3.9"
-license = {text = "MIT"}
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: Implementation :: CPython",
@@ -24,9 +23,9 @@ dependencies = [
 ]
 
 [project.urls]
-homepage = "https://github.com/foobar-author/foobar"
-documentation = "https://foobar.readthedocs.io"
-repository = "https://github.com/foobar-author/foobar"
+Homepage = "https://github.com/foobar-author/foobar"
+Documentation = "https://foobar.readthedocs.io"
+Source = "https://github.com/foobar-author/foobar"
 
 [project.optional-dependencies]
 dev = [
@@ -68,7 +67,7 @@ plugins = ["covdefaults"]
 omit = ["examples"]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.10"
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
@@ -90,7 +89,7 @@ allow_untyped_defs = true
 
 [tool.ruff]
 line-length = 79
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.format]
 indent-style = "space"
@@ -162,3 +161,5 @@ convention = "google"
 [tool.setuptools.packages.find]
 exclude = ["tests*", "testing*"]
 namespaces = false
+
+[tool.setuptools_scm]
