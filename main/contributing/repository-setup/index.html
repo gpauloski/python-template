@@ -12,13 +12,13 @@
         <meta name="author" content="pypkg-author">
       
       
-        <link rel="canonical" href="https://gpauloski.github.io/python-template/latest/contributing/style-guide/">
+        <link rel="canonical" href="https://gpauloski.github.io/python-template/latest/contributing/repository-setup/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../issues-pull-requests/">
       
       
-        <link rel="next" href="../issues-pull-requests/">
+        <link rel="next" href="../releases/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Style Guide - Python Template</title>
+        <title>Repository Setup - Python Template</title>
       
     
     
@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#recommended-repository-defaults" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -117,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Style Guide
+              Repository Setup
             
           </span>
         </div>
@@ -907,17 +912,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../style-guide/" class="md-nav__link">
         
   
   
@@ -933,7 +931,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -971,10 +968,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../repository-setup/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Setup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -990,6 +1012,57 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-repository-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Repository Defaults
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pypi-trusted-publishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PyPI Trusted Publishing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-and-pull-request-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue and Pull Request Labels
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1048,6 +1121,47 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-repository-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Repository Defaults
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pypi-trusted-publishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PyPI Trusted Publishing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-and-pull-request-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue and Pull Request Labels
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1072,29 +1186,94 @@
   
 
 
-  <h1>Style Guide</h1>
+  <h1>Repository Setup</h1>
 
-<p>The Python code and docstring format mostly follows Google's
-<a href="https://google.github.io/styleguide/pyguide.html" target="_blank">Python Style Guide</a>,
-but the pre-commit config is the authoritative source for code format
-compliance.</p>
-<p><strong>Nits:</strong></p>
+<p>This guide covers the one-time GitHub configuration for a repository created
+from this template.</p>
+<h2 id="recommended-repository-defaults">Recommended Repository Defaults<a class="headerlink" href="#recommended-repository-defaults" title="Permanent link">&para;</a></h2>
+<p>In your repository <strong>Settings</strong>:</p>
 <ul>
-<li>Avoid imports in <code>__init__.py</code> (reduces the likelihood of circular imports).</li>
-<li>Prefer pure functions where possible.</li>
-<li>Define all class attributes inside <code>__init__</code> so all attributes are visible
-  in one place. Attributes that are defined later can be set as <code>None</code>
-  as a placeholder.</li>
-<li>Prefer f-strings (<code class="language-python highlight"><span class="sa">f</span><span class="s1">&#39;name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span></code>) over string format
-  (<code class="language-python highlight"><span class="s1">&#39;name: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code>). Never use the <code>%</code> operator.</li>
-<li>Prefer <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/typing.html#typing.NamedTuple">typing.NamedTuple</a> over <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/collections.html#collections.namedtuple">collections.namedtuple</a>.</li>
-<li>Use lower-case and no punctuation for log messages, but use upper-case and
-  punctuation for exception values.
-  <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;new connection opened to </span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Name must contain alphanumeric characters only.&#39;</span><span class="p">)</span>
-</span></code></pre></div></li>
-<li>Document all exceptions that may be raised by a function in the docstring.</li>
+<li><strong>General → Pull Requests:</strong><ul>
+<li>Prefer <strong>Squash merging</strong> (and consider disabling merge commits) to keep a
+  linear history where one PR maps to one commit.</li>
+<li>Enable <strong>Automatically delete head branches</strong> to clean up merged branches.</li>
 </ul>
+</li>
+<li><strong>Branches → Add branch ruleset (or protection) for <code>main</code>:</strong><ul>
+<li>Require a pull request before merging.</li>
+<li>Require status checks to pass before merging, and require branches to be
+  up to date. Select the checks you want to enforce (e.g. <code>tests</code>, <code>prek</code>,
+  <code>check-docs</code>).</li>
+<li>Do not allow bypassing the above settings.</li>
+</ul>
+</li>
+<li><strong>Pages:</strong> once the <code>docs</code> workflow has run and created the <code>gh-pages</code>
+  branch, set Pages to deploy from that branch.</li>
+<li><strong>Actions → General:</strong> allow the workflow permissions the template needs
+  (the workflows request least-privilege permissions per job).</li>
+</ul>
+<h2 id="pypi-trusted-publishing">PyPI Trusted Publishing<a class="headerlink" href="#pypi-trusted-publishing" title="Permanent link">&para;</a></h2>
+<p>The <code>publish</code> workflow uses
+<a href="https://docs.pypi.org/trusted-publishers/" target="_blank">PyPI Trusted Publishing</a>
+(OIDC), so no API token secret is required. Configure a
+<a href="https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/" target="_blank">pending publisher</a>
+on PyPI that points at this repository, the <code>publish.yml</code> workflow, and the
+<code>release</code> environment (if you use one).</p>
+<h2 id="issue-and-pull-request-labels">Issue and Pull Request Labels<a class="headerlink" href="#issue-and-pull-request-labels" title="Permanent link">&para;</a></h2>
+<p>Release notes are generated automatically from PR labels (see
+<code>.github/release.yml</code>). Create the following labels so the generated changelog
+is organized correctly:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Purpose</th>
+<th>Suggested color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>breaking</code></td>
+<td>Backwards-incompatible changes</td>
+<td><code>#b60205</code></td>
+</tr>
+<tr>
+<td><code>enhancement</code></td>
+<td>New features</td>
+<td><code>#0e8a16</code></td>
+</tr>
+<tr>
+<td><code>bug</code></td>
+<td>Bug fixes</td>
+<td><code>#d73a4a</code></td>
+</tr>
+<tr>
+<td><code>refactor</code></td>
+<td>Internal changes / improvements</td>
+<td><code>#fbca04</code></td>
+</tr>
+<tr>
+<td><code>documentation</code></td>
+<td>Documentation-only changes</td>
+<td><code>#0075ca</code></td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td>Dependency updates</td>
+<td><code>#c5def5</code></td>
+</tr>
+<tr>
+<td><code>ignore-for-release</code></td>
+<td>Excluded from release notes</td>
+<td><code>#ededed</code></td>
+</tr>
+</tbody>
+</table>
+<p>Every PR should carry at least one of these labels; unlabeled PRs fall into the
+"Other Changes" section of the release notes. You can create them quickly with
+the <a href="https://cli.github.com/" target="_blank">GitHub CLI</a>, e.g.:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>gh<span class="w"> </span>label<span class="w"> </span>create<span class="w"> </span>breaking<span class="w"> </span>--color<span class="w"> </span>b60205<span class="w"> </span>--description<span class="w"> </span><span class="s2">&quot;Breaking change&quot;</span>
+</span></code></pre></div>
 
 
 
