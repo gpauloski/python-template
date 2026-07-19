@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from foobar.foo import bar
+from pypkg.foo import bar
 from testing.data import DATA
 
 

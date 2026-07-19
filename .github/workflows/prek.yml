@@ -1,12 +1,8 @@
-# This workflow just verifies that the docs build without any
-# warnings (as configured in the tox recipe). This is only run on
-# the test-me-* branches and PRs as pushes to main will trigger the docs
-# workflow.
-name: check-docs
+name: prek
 
 on:
   push:
-    branches: [test-me-*]
+    branches: [main, test-me-*]
   pull_request:
   workflow_dispatch:
 
@@ -14,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  check-docs:
+  prek:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
@@ -28,5 +24,8 @@ jobs:
           enable-cache: true
           cache-python: true
 
-      - name: Build docs with tox
-        run: uv run tox -e docs
+      - name: Install the project
+        run: uv sync
+
+      - name: Run prek
+        run: uv run prek run --all-files --show-diff-on-failure

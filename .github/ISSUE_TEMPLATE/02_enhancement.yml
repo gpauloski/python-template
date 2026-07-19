@@ -2,7 +2,7 @@ name: Enhancement Request
 description: Request a new feature or enhancement.
 labels: ["enhancement"]
 assignees:
-  - foobar-enh-assign-dev
+  - pypkg-enh-assign-dev
 body:
   - type: textarea
     id: request

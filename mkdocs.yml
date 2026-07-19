@@ -1,12 +1,12 @@
 site_name: Python Template
 site_url: https://gpauloski.github.io/python-template
-site_author: FooBar Author
-site_description: Documentation for FooBar.
+site_author: pypkg-author
+site_description: Documentation for pypkg.
 
 repo_name: gpauloski/python-template
 repo_url: https://github.com/gpauloski/python-template
 
-copyright: Copyright &copy; 2023—Present FooBar Authors
+copyright: Copyright &copy; 2023—Present pypkg-author
 
 theme:
   name: material
@@ -61,7 +61,7 @@ watch:
   - mkdocs.yml
   - README.md
   - docs/
-  - foobar/
+  - pypkg/
 
 extra:
   version:
@@ -90,8 +90,8 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.magiclink:
       repo_url_shorthand: true
-      user: foobar-author
-      repo: foobar
+      user: pypkg-author
+      repo: pypkg
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.snippets:
@@ -118,6 +118,7 @@ nav:
       - contributing/index.md
       - Style Guide: contributing/style-guide.md
       - Issues and Pull Requests: contributing/issues-pull-requests.md
+      - Repository Setup: contributing/repository-setup.md
       - Releases: contributing/releases.md
 
 plugins:
@@ -134,10 +135,7 @@ plugins:
       enable_inventory: true
       handlers:
         python:
-          setup_commands:
-            - import pytkdocs_tweaks
-            - pytkdocs_tweaks.main()
-          import:
+          inventories:
             - https://docs.python.org/3/objects.inv
           options:
             annotations_path: brief

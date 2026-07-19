@@ -7,11 +7,15 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     timeout-minutes: 10
 
     strategy:
+      fail-fast: false
       matrix:
         include:
         - os: ubuntu-latest
@@ -32,26 +36,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up Python ${{matrix.python}}
-        uses: actions/setup-python@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
+          enable-cache: true
+          # Cache the interpreter download in addition to the package cache.
+          cache-python: true
+          # Sets UV_PYTHON, which takes precedence over .python-version. This
+          # keeps the tox driver environment on the same interpreter as the
+          # environment under test, so each job provisions only one Python.
           python-version: ${{ matrix.python }}
 
-      - name: Get pip cache dir
-        id: pip-cache-dir
-        run: echo "PIP_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
-
-      - name: Use pip cache
-        id: pip-cache
-        uses: actions/cache@v6
-        with:
-          path: ${{ env.PIP_CACHE_DIR }}
-          key: tests-${{ matrix.os }}-pip-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
-          restore-keys: |
-            tests-${{ matrix.os }}-pip-${{ matrix.python }}-
-
-      - name: Install Packages
-        run: python -mpip install --upgrade pip tox
-
-      - name: Run Tox
-        run: tox -e ${{ matrix.toxenv }}
+      - name: Run tox
+        run: uv run tox -e ${{ matrix.toxenv }}

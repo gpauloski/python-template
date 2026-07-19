@@ -1,4 +1,4 @@
-# Tests for foobar
+# Tests for pypkg
 
 Test files should take the form `*_test.py` and tests inside files should be top-level functions named `test_*()`.
 

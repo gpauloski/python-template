@@ -2,66 +2,109 @@
 
 [![docs](https://github.com/gpauloski/python-template/actions/workflows/docs.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
 [![tests](https://github.com/gpauloski/python-template/actions/workflows/tests.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/gpauloski/python-template/main.svg)](https://results.pre-commit.ci/latest/github/gpauloski/python-template/main)
+[![prek](https://github.com/gpauloski/python-template/actions/workflows/prek.yml/badge.svg)](https://github.com/gpauloski/python-template/actions)
 
-Python package template repo that provides:
-- Package, examples, and testing layout.
-- GitHub PR and Issue templates.
-- Example docs with MKDocs and GitHub Pages.
-- CI framework with `pre-commit` and `tox`.
-- GitHub actions for running tests and publishing packages.
+An opinionated, modern Python package template that provides:
 
-This package setup was based on [Anthony Sottile's project setup](https://www.youtube.com/watch?v=q8DkatMZvUs&list=PLWBKAf81pmOaP9naRiNAqug6EBnkPakvY) but deviates in some places (e.g., `pyproject.toml` and `ruff`).
+- A flat package layout with a `testing/` helpers package.
+- [uv](https://docs.astral.sh/uv/) for dependency management and environments.
+- Strict linting/formatting ([Ruff](https://docs.astral.sh/ruff/)), type
+  checking ([mypy](https://mypy.readthedocs.io/) strict), and spell checking
+  ([typos](https://github.com/crate-ci/typos)).
+- [prek](https://github.com/j178/prek) (a fast pre-commit replacement) and
+  [tox](https://tox.wiki/) for local and CI checks.
+- GitHub Actions for tests, docs, and publishing (PyPI Trusted Publishing).
+- Docs with [MkDocs](https://www.mkdocs.org/) + Material and GitHub Pages.
+- PR/issue templates and agent instructions (`AGENTS.md`/`CLAUDE.md`).
 
-## Setup Instructions
+The original layout was inspired by
+[Anthony Sottile's project setup](https://www.youtube.com/watch?v=q8DkatMZvUs&list=PLWBKAf81pmOaP9naRiNAqug6EBnkPakvY),
+but this template has since diverged significantly.
 
-1. Click the "Use this template" button at the top right of this page.
-2. Delete and directories you will not be using (commonly `docs/` if you do not want to use MKDocs or `examples/` if you will not have example code).
-3. Follow the instructions to create the new repo then clone your repo locally.
-4. The template uses "foobar" to indicate things that need to be changed.
-   Start by searching for all instances (`git grep foobar`) and changing them accordingly.
-5. Configure pre-commit:
-    - Go to [https://pre-commit.ci/](https://pre-commit.ci/) and enable pre-commit on your repo.
-    - Update the pre-commit badge URL in this README with your new badge URL.
-6. Configure GitHub pages:
-    - Go to the "Pages" section of your repository settings.
-    - Select "Deploy from a branch" and use the "gh-pages" branch.
-7. Configure PyPI releases (if relevant):
-    - Create a new API token for [https://pypi.org/](https://pypi.org/).
-    - Add the token as a GitHub actions secret (see the instructions [here](https://github.com/pypa/gh-action-pypi-publish)).
-8. Delete this boilerplate stuff in the README.
-9. Commit and push changes.
+## Creating a New Project
 
-### GitHub Configuration
+You can either start from this template or scaffold from scratch with uv.
 
-I recommend making a few other changes to the repo's setting on GitHub.
-- In "General"
-  - Select/deselect features you need/don't need.
-  - Select "Automatically delete head branches
-- In "Branches": enable branch protection on `main`.
-  - Check "Require a pull request before merging"
-  - Check "Require status checks to pass before merging"
-    - Check "Require branches to be up to date before merging"
-    - Set required checks (e.g., pre-commit.ci, tests, etc.)
-  - Check "Do not allow bypassing the above settings"
+**Option A — Use this template (recommended).**
+
+1. Click **"Use this template"** at the top right of the repo.
+2. Clone your new repo locally.
+3. Delete directories you will not use (e.g. `docs/` if you do not want MkDocs).
+4. The template uses `pypkg` as a placeholder. Find and replace every instance:
+   ```bash
+   git grep -l pypkg   # review the matches
+   ```
+   Rename the `pypkg/` package directory and update `pypkg`, `pypkg-author`,
+   and `gpauloski/python-template` throughout (`pyproject.toml`, `mkdocs.yml`,
+   docs, workflows, etc.).
+5. Update author, description, and URLs in `pyproject.toml`.
+6. Configure the repository (see [Repository Setup](#repository-setup)).
+
+**Option B — Start fresh with uv.**
+
+Run `uv init --lib <name>` to scaffold a new library, then copy the tooling
+config from this template (`pyproject.toml` tool sections, `.pre-commit-config.yaml`,
+`tox.ini`, `.github/`, and the agent files). Note that `uv init --lib` uses a
+`src/` layout; this template uses a flat layout, so move the package up a level
+if you want to match it.
+
+## Development
+
+This project uses [uv](https://docs.astral.sh/uv/). Install it first
+(see the [uv install docs](https://docs.astral.sh/uv/getting-started/installation/)):
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Then create the environment, activate it, and install the git hooks:
+
+```bash
+uv sync                       # create .venv and install the project + dev tools
+source .venv/bin/activate     # Windows: .venv\Scripts\activate
+prek install                  # install the git pre-commit hooks
+```
+
+With the environment activated, run tools directly:
+
+```bash
+pytest                     # run the tests
+prek run --all-files       # run all lint/format/type/spell checks
+mypy .                     # type check
+tox                        # full matrix: py3.10-3.13, prek, docs
+tox -e py313               # a single environment
+mkdocs serve               # preview docs locally (needs the docs group)
+```
+
+Install the docs dependency group when working on documentation:
+
+```bash
+uv sync --group docs
+```
+
+If you would rather not activate the environment, prefix any command with
+`uv run` (e.g. `uv run pytest`) to run it inside the managed environment.
 
 ## Installation
 
-Install via pip:
-```
-$ pip install foobar
+Install the released package via pip:
+
+```bash
+pip install pypkg
 ```
 
-For local development:
-```
-$ tox --devenv venv -e py310
-$ pre-commit install
-```
-or
-```
-$ pip install -e .
-```
+## Repository Setup
 
-## Additional README Sections
+After creating your repository from the template, configure GitHub:
 
-...
+- **General:** enable "Automatically delete head branches" and prefer
+  "Squash merging".
+- **Branches:** add a branch protection (or ruleset) for `main` requiring a PR
+  and passing status checks (`tests`, `prek`, `check-docs`).
+- **Pages:** deploy from the `gh-pages` branch (created by the docs workflow).
+- **PyPI:** configure [Trusted Publishing](https://docs.pypi.org/trusted-publishers/)
+  pointing at the `publish` workflow (no API token required).
+
+See `docs/contributing/repository-setup.md` for the full checklist, including
+recommended issue labels that align with the release-notes categories, and
+`docs/contributing/releases.md` for how to cut a release.

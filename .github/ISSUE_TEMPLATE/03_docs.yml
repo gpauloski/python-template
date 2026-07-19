@@ -2,7 +2,7 @@ name: Documentation Improvements
 description: Suggest improvements to the documentation.
 labels: ["documentation"]
 assignees:
-  - foobar-doc-assignee-dev
+  - pypkg-doc-assignee-dev
 body:
   - type: textarea
     id: freeform

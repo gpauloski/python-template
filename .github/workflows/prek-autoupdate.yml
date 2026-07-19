@@ -1,0 +1,47 @@
+name: prek-autoupdate
+
+# Weekly refresh of pinned hook versions in .pre-commit-config.yaml. Runs
+# `prek autoupdate` and opens a pull request if anything changed. Replaces the
+# autoupdate service that pre-commit.ci provided.
+on:
+  schedule:
+    # Mondays at 06:00 UTC.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  autoupdate:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-python: true
+
+      - name: Install the project
+        run: uv sync
+
+      - name: Run prek autoupdate
+        run: uv run prek autoupdate
+
+      - name: Open a pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "[prek] autoupdate hooks"
+          title: "[prek] autoupdate hooks"
+          body: >
+            Automated weekly update of pre-commit hook versions via
+            `prek autoupdate`.
+          branch: prek-autoupdate
+          delete-branch: true
+          labels: dependencies

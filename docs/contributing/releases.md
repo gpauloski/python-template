@@ -1,7 +1,7 @@
 ## Release Timeline
 
 Releases are created on an as-needed basis.
-Milestones are the [Issue Tracker](https://github.com/foobar-author/foobar/issues){target=_blank} are used to track features to be included in upcoming releases.
+Milestones are the [Issue Tracker](https://github.com/pypkg-author/pypkg/issues){target=_blank} are used to track features to be included in upcoming releases.
 
 ## Creating Releases
 
@@ -12,19 +12,22 @@ Milestones are the [Issue Tracker](https://github.com/foobar-author/foobar/issue
    start at 0 and pre-release/post-release/dev-release segments start at 1.
 1. Tag the release commit and push.
    ```bash
-   $ git tag -s v{VERSION} -m "FooBar v{VERSION}"
+   $ git tag -s v{VERSION} -m "pypkg v{VERSION}"
    $ git push origin v{VERSION}
    ```
    Note the version number is prepended by "v" for the tags so tooling can
    distinguish release tags from non-release tags.
 5. Create a new release on GitHub using the tag. The title should be
-   `FooBar v{VERSION}`.
+   `pypkg v{VERSION}`. Publishing the release triggers the `publish` workflow,
+   which builds the package and uploads it to PyPI via Trusted Publishing (no
+   token required) and deploys the versioned docs. See
+   [Repository Setup](repository-setup.md) for the one-time PyPI configuration.
 6. **Official release:**
     1. Use the "Generate release notes" option and set the previous tag as the previous official release tag. E.g., for `v0.4.1`, the previous release tag should be `v0.4.0` and NOT `v0.4.1a1`.
     2. Add an "Upgrade Steps" section at the top (see previous releases for examples).
     3. Review the generated notes and edit as needed. PRs are organized by tag, but some PRs will be missing tags and need to be moved from the "Other Changes" section to the correct section.
     4. Select "Set as the latest release."
 7. **Unofficial release:** (alpha/dev builds)
-    1. Do NOT generate release notes. The body can be along the lines of "Development pre-prelease for `V{VERSION}`."
+    1. Do NOT generate release notes. The body can be along the lines of "Development pre-prerelease for `V{VERSION}`."
     2. Leave the previous tag as "auto."
     3. Select "Set as a pre-release."

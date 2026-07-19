@@ -3,14 +3,15 @@ requires = ["setuptools>=77.0", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "foobar"
+name = "pypkg"
 authors = [
-    {name = "foobar author", email = "foobar@foobar.com"},
+    {name = "pypkg-author", email = "pypkg-author@example.com"},
 ]
-description = "Foobar example package"
+description = "pypkg example package"
 dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.10"
+keywords = ["pypkg"]
 license = "MIT"
 license-files = ["LICENSE"]
 classifiers = [
@@ -23,69 +24,61 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/foobar-author/foobar"
-Documentation = "https://foobar.readthedocs.io"
-Source = "https://github.com/foobar-author/foobar"
+Homepage = "https://github.com/pypkg-author/pypkg"
+Documentation = "https://pypkg.readthedocs.io"
+Source = "https://github.com/pypkg-author/pypkg"
 
-[project.optional-dependencies]
+# Development tooling lives in PEP 735 dependency groups rather than
+# optional-dependencies. uv installs the `dev` group by default (`uv sync`),
+# and tox pulls groups in per-environment. Install a group explicitly with
+# `uv sync --group docs`. See https://peps.python.org/pep-0735/.
+[dependency-groups]
 dev = [
     "covdefaults>=2.2",
     "coverage",
     "mypy",
-    "pre-commit",
+    "prek",
     "pytest",
     "pytest-cov",
     "ruff>=0.2.0",
-    "tox",
-    "virtualenv",
+    "tox>=4.22",
+    "tox-uv-bare",
 ]
+# Lower bounds only; exact versions are pinned in uv.lock for reproducibility.
 docs = [
-    "black==24.4.2",
-    "mkdocs-autorefs==1.3.1",
-    "mkdocs-click==0.8.1",
-    "mkdocs-gen-files==0.5.0",
-    "mkdocs-literate-nav==0.6.1",
-    "mkdocs-material==9.5.32",
-    "mkdocs-section-index==0.3.9",
-    "mkdocstrings==0.25.2",
-    "mkdocstrings-python==1.10.8",
-    "mike==2.1.3",
+    # black is used by mkdocstrings-python to format rendered signatures.
+    "black>=24",
+    "mkdocs-autorefs>=1.3",
+    "mkdocs-click>=0.8",
+    "mkdocs-gen-files>=0.5",
+    "mkdocs-literate-nav>=0.6",
+    "mkdocs-material>=9.5",
+    "mkdocs-section-index>=0.3",
+    "mkdocstrings>=0.25",
+    "mkdocstrings-python>=1.10",
+    "mike>=2.1",
 ]
-
-[tool.codespell]
-skip = """
-.git,
-.github,
-__pycache__,
-build,
-dist,
-.*egg-info
-"""
 
 [tool.coverage.run]
 plugins = ["covdefaults"]
-omit = ["examples"]
 
 [tool.mypy]
 python_version = "3.10"
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_configs = true
-warn_unused_ignores = true
+# Strict mode turns on the full suite of type-checking flags (disallow untyped
+# defs, warn on Any, etc.). See https://mypy.readthedocs.io/en/stable/config_file.html.
+strict = true
+# Docs helper scripts (e.g. docs/generate_api.py) import mkdocs plugins that are
+# only present in the `docs` dependency group, so exclude them from type checks.
+# Also exclude build artifacts so a local `mkdocs build` (site/) does not break
+# `mypy .`.
+exclude = ["^docs/", "^site/", "^build/", "^dist/"]
 
 [[tool.mypy.overrides]]
-module = "testing.*"
+# Test code may use untyped defs and untyped decorators (e.g. parametrize).
+module = ["testing.*", "tests.*"]
 allow_incomplete_defs = true
 allow_untyped_defs = true
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-allow_incomplete_defs = true
-allow_untyped_defs = true
+disallow_untyped_decorators = false
 
 [tool.ruff]
 line-length = 79
@@ -94,50 +87,29 @@ target-version = "py310"
 [tool.ruff.format]
 indent-style = "space"
 quote-style = "single"
+line-ending = "lf"
 
 [tool.ruff.lint]
-# See all rules here: https://beta.ruff.rs/docs/rules
-select = [
-    # pyflakes
-    "F",
-    # pycodestyle
-    "E",
-    # mccabe
-    "C90",
-    # isort
-    "I",
-    # pep8-naming
-    "N",
-    # pydocstyle
-    "D",
-    # pyupgrade
-    "UP",
-    # flake8-2020
-    "YTT",
-    # flake8-bugbear
-    "B",
-    # flake8-builtins
-    "A",
-    # flake8-commas
-    "COM",
-    # flake8-comprehensions
-    "C4",
-    # flake8-implicit-str-concat
-    "ISC",
-    # flake8-pytest-style
-    "PT",
-    # flake8-quotes
-    "Q",
-    # flake8-debugger
-    "T10",
-    # flake8-simplify
-    "SIM",
-    # PyLint
-    "PL",
-    # ruff-specific
-    "RUF",
+# Enable every lint rule by default, then opt out below. This is intentionally
+# strict: new rules are picked up automatically on upgrade. See all rules at
+# https://docs.astral.sh/ruff/rules/.
+select = ["ALL"]
+ignore = [
+    # The following conflict with the Ruff formatter and must stay disabled:
+    # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+    "COM812", # missing-trailing-comma (handled by the formatter)
+    "ISC001", # single-line-implicit-string-concatenation
+    # Redundant/mutually-exclusive pydocstyle rules. We use the Google
+    # convention (set below), which is incompatible with these:
+    "D203", # one-blank-line-before-class (conflicts with D211)
+    "D213", # multi-line-summary-second-line (conflicts with D212)
+    # Do not require a copyright notice at the top of every file.
+    "CPY001",
+    # Code complexity is enforced by the complexipy pre-commit hook (cognitive
+    # complexity), so disable Ruff's overlapping complexity checks.
+    "C901",    # mccabe complex-structure
+    "PLR0912", # too-many-branches
 ]
-extend-ignore = []
 
 [tool.ruff.lint.flake8-pytest-style]
 parametrize-values-type = "tuple"
@@ -147,13 +119,28 @@ inline-quotes = "single"
 
 [tool.ruff.lint.isort]
 force-single-line = true
-known-first-party = ["foobar", "test", "testing"]
+known-first-party = ["pypkg", "tests", "testing"]
 order-by-type = false
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.per-file-ignores]
-"*/__init__.py" = ["F401"]
-"*/*_test.py" = ["D10"]
+# __init__.py commonly re-exports names: allow unused/star imports.
+"*/__init__.py" = ["F401", "F403"]
+# Test modules and helpers: relax rules that add friction without value in
+# tests (assertions, missing docstrings/annotations, magic values, and access
+# to private members of the code under test).
+"tests/**" = [
+    "S101",    # asserts are how pytest tests work
+    "D",       # docstrings not required in tests
+    "ANN",     # type annotations not required in tests
+    "PLR2004", # magic values are fine in test expectations
+    "SLF001",  # tests may touch private members
+    "INP001",  # test dirs are not import packages
+]
+"testing/**" = ["S101", "D", "ANN", "PLR2004", "SLF001"]
+"*_test.py" = ["S101", "D", "ANN", "PLR2004", "SLF001"]
+# Docs helper scripts are not an importable package.
+"docs/**" = ["INP001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
@@ -161,5 +148,11 @@ convention = "google"
 [tool.setuptools.packages.find]
 exclude = ["tests*", "testing*"]
 namespaces = false
+
+# Spell checking is handled by crate-ci/typos (see .pre-commit-config.yaml),
+# which respects .gitignore. Exclude the lockfile since its hashes trip up the
+# spell checker. https://github.com/crate-ci/typos
+[tool.typos.files]
+extend-exclude = ["uv.lock"]
 
 [tool.setuptools_scm]
