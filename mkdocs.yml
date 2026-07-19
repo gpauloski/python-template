@@ -135,10 +135,7 @@ plugins:
       enable_inventory: true
       handlers:
         python:
-          setup_commands:
-            - import pytkdocs_tweaks
-            - pytkdocs_tweaks.main()
-          import:
+          inventories:
             - https://docs.python.org/3/objects.inv
           options:
             annotations_path: brief
