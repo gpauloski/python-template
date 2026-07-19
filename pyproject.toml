@@ -44,9 +44,10 @@ dev = [
     "pytest",
     "pytest-cov",
     "ruff>=0.2.0",
-    "tox>=4",
-    # tox-uv makes tox build environments with uv for much faster installs.
-    "tox-uv",
+    "tox>=4.22",
+    # tox-uv-bare exposes the uv-backed tox runners without hijacking the
+    # default runner: each env opts in via `runner = uv-venv-lock-runner`.
+    "tox-uv-bare",
 ]
 docs = [
     "black==24.4.2",

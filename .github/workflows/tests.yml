@@ -7,11 +7,15 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     timeout-minutes: 10
 
     strategy:
+      fail-fast: false
       matrix:
         include:
         - os: ubuntu-latest
@@ -32,26 +36,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up Python ${{matrix.python}}
-        uses: actions/setup-python@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
-          python-version: ${{ matrix.python }}
+          enable-cache: true
 
-      - name: Get pip cache dir
-        id: pip-cache-dir
-        run: echo "PIP_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
+      - name: Set up Python ${{ matrix.python }}
+        run: uv python install ${{ matrix.python }}
 
-      - name: Use pip cache
-        id: pip-cache
-        uses: actions/cache@v6
-        with:
-          path: ${{ env.PIP_CACHE_DIR }}
-          key: tests-${{ matrix.os }}-pip-${{ matrix.python }}-${{ hashFiles('pyproject.toml') }}
-          restore-keys: |
-            tests-${{ matrix.os }}-pip-${{ matrix.python }}-
-
-      - name: Install Packages
-        run: python -mpip install --upgrade pip tox
-
-      - name: Run Tox
-        run: tox -e ${{ matrix.toxenv }}
+      - name: Run tox
+        run: uv run tox -e ${{ matrix.toxenv }}

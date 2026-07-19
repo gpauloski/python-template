@@ -5,12 +5,15 @@ on:
     types: [published]
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      # Required for PyPI Trusted Publishing (OIDC). No API token needed:
+      # https://docs.pypi.org/trusted-publishers/
+      id-token: write
+      # Required for mike to push the docs to the gh-pages branch.
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -19,9 +22,9 @@ jobs:
 
       - name: Extract version from tag
         run: |
-          # Removes 'v' prefix from tag (e.g., v1.0.0 -> 1.0.0)
+          # Removes 'v' prefix from tag (e.g. v1.0.0 -> 1.0.0)
           VERSION=${GITHUB_REF_NAME#v}
-          echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "Extracted version from tag: $VERSION"
 
       - name: Check package version is PEP440 compliant
@@ -29,28 +32,27 @@ jobs:
         # patch, but not any optional suffixes.
         run: echo "${{ env.PACKAGE_VERSION }}" | grep -P "^\d+\.\d+\.\d+.*$"
 
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
-          python-version: '3.11'
+          enable-cache: true
 
-      - name: Install pypa/build and build
-        run: |
-          pip install build
-          python -m build --sdist --wheel --outdir dist/ .
+      - name: Build sdist and wheel
+        run: uv build
 
       - name: Publish to PyPI
         if: startsWith(github.ref, 'refs/tags')
+        # Trusted Publishing: configure a pending publisher on PyPI pointing at
+        # this workflow. Falls back to a token via `with: password: ...`.
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_TOKEN }}
 
       - name: Configure git
         run: |
           git config --local user.name "GitHub Actions Bot"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Deploy docs for release version to gh-pages branch
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          pip install .[docs]
-          mike deploy --push --update-aliases "${{ env.PACKAGE_VERSION }}" latest
+          uv sync --group docs
+          uv run mike deploy --push --update-aliases "${{ env.PACKAGE_VERSION }}" latest
