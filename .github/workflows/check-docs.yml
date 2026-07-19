@@ -26,9 +26,7 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
-
-      - name: Set up Python
-        run: uv python install
+          cache-python: true
 
       - name: Build docs with tox
         run: uv run tox -e docs

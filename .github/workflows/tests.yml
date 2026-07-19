@@ -40,9 +40,12 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
-
-      - name: Set up Python ${{ matrix.python }}
-        run: uv python install ${{ matrix.python }}
+          # Cache the interpreter download in addition to the package cache.
+          cache-python: true
+          # Sets UV_PYTHON, which takes precedence over .python-version. This
+          # keeps the tox driver environment on the same interpreter as the
+          # environment under test, so each job provisions only one Python.
+          python-version: ${{ matrix.python }}
 
       - name: Run tox
         run: uv run tox -e ${{ matrix.toxenv }}
