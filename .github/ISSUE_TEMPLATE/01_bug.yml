@@ -2,20 +2,20 @@ name: Bug Report
 description: Report errors or unexpected results.
 labels: ["bug"]
 assignees:
-  - foobar-bug-assign-dev
+  - pypkg-bug-assign-dev
 body:
   - type: textarea
     id: install
     attributes:
-      label: How did you install foobar?
+      label: How did you install pypkg?
       description: >
         E.g., install via pip, install from source, etc. **Note:** this will
         be rendered as console text automatically.
       placeholder: |
-        $ pip install foobar
-        Collecting foobar
+        $ pip install pypkg
+        Collecting pypkg
         ...
-        Successfully installed foobar...
+        Successfully installed pypkg...
       render: console
     validations:
       required: true
@@ -23,7 +23,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: What version of foobar are you using?
+      label: What version of pypkg are you using?
       description: >
         Package version if installed via Pip or commit ID if installed
         from source.

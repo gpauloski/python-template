@@ -1,6 +1,6 @@
 ## Issues
 
-[Issue Tracker](https://github.com/foobar-author/foobar/issues){target=_blank}
+[Issue Tracker](https://github.com/pypkg-author/pypkg/issues){target=_blank}
 
 We use GitHub issues to report problems, request and track changes, and discuss
 future ideas.

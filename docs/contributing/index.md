@@ -1,26 +1,28 @@
 ## Getting Started for Local Development
 
-FooBar uses [uv](https://docs.astral.sh/uv/){target=_blank} to manage the
+pypkg uses [uv](https://docs.astral.sh/uv/){target=_blank} to manage the
 development environment. First
 [install uv](https://docs.astral.sh/uv/getting-started/installation/){target=_blank},
 then clone the repository and sync the environment.
 
 ```bash
-$ git clone https://github.com/foobar-author/foobar
-$ cd foobar
-$ uv sync              # creates .venv with the project + dev dependencies
-$ uv run prek install  # install the git pre-commit hooks
+$ git clone https://github.com/pypkg-author/pypkg
+$ cd pypkg
+$ uv sync                    # creates .venv with the project + dev dependencies
+$ source .venv/bin/activate  # Windows: .venv\Scripts\activate
+$ prek install               # install the git pre-commit hooks
 ```
 
 `uv sync` installs the `dev` dependency group by default. Add the docs group
 when working on documentation with `#!bash $ uv sync --group docs`.
 
-Prefix commands with `#!bash $ uv run` to execute them inside the managed
-environment (or activate it with `#!bash $ source .venv/bin/activate`).
+Activating the environment lets you invoke tools directly (`#!bash $ pytest`,
+`#!bash $ tox`, ...). If you prefer not to activate it, prefix commands with
+`#!bash $ uv run` instead.
 
 ## Continuous Integration
 
-FooBar uses [prek](https://github.com/j178/prek){target=_blank} (a drop-in
+pypkg uses [prek](https://github.com/j178/prek){target=_blank} (a drop-in
 replacement for pre-commit) and
 [Tox](https://tox.wiki/en/latest/index.html){target=_blank} for continuous
 integration (tests, linting, type checking, etc.).
@@ -31,18 +33,18 @@ The hooks (Ruff, mypy, typos, complexipy, and more) are configured in
 `.pre-commit-config.yaml`. Run them against all files with:
 
 ```bash
-$ uv run prek run --all-files
+$ prek run --all-files
 ```
 
 ### Tests (tox)
 
 Tox environments run with uv via `tox-uv`. The entire CI workflow can be run
-with `#!bash $ uv run tox`; this tests against multiple versions of Python and
+with `#!bash $ tox`; this tests against multiple versions of Python and
 can be slow.
 
 Module-level unit tests are located in the `tests/` directory and its
-structure is intended to match that of `foobar/`.
-E.g. the tests for `foobar/x/y.py` are located in
+structure is intended to match that of `pypkg/`.
+E.g. the tests for `pypkg/x/y.py` are located in
 `tests/x/y_test.py`; however, additional test files can be added
 as needed. Tests should be narrowly focused and target a single aspect of the
 code's functionality, tests should not test internal implementation details of
@@ -53,11 +55,11 @@ Code that is useful for building tests but is not a test itself belongs in the
 
 ```bash
 # Run all tests in a single environment
-$ uv run tox -e py313
+$ tox -e py313
 # Run a specific test
-$ uv run tox -e py313 -- tests/x/y_test.py::test_z
+$ tox -e py313 -- tests/x/y_test.py::test_z
 # Or run pytest directly in the current environment
-$ uv run pytest tests/x/y_test.py::test_z
+$ pytest tests/x/y_test.py::test_z
 ```
 
 ## Docs
@@ -69,11 +71,11 @@ MkDocs.
 ```bash
 # Manually (install the docs dependency group first)
 $ uv sync --group docs
-$ uv run mkdocs build --strict  # Build only to site/index.html
-$ uv run mkdocs serve           # Serve locally
+$ mkdocs build --strict  # Build only to site/index.html
+$ mkdocs serve           # Serve locally
 
 # With tox (will only build, does not serve)
-$ uv run tox -e docs
+$ tox -e docs
 ```
 
 Docstrings are automatically generated, but it is recommended to check the

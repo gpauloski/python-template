@@ -18,11 +18,11 @@ pages (guides, overviews, etc.).
        - guides/index.md
        - My Feature: guides/my-feature.md
    ```
-3. Cross-reference symbols with mkdocstrings autorefs (e.g. `[foobar.foo.bar][]`)
+3. Cross-reference symbols with mkdocstrings autorefs (e.g. `[pypkg.foo.bar][]`)
    where helpful.
 4. Build with strict mode to catch broken links and nav issues:
    ```bash
    uv sync --group docs
-   uv run mkdocs serve            # preview locally
-   uv run tox -e docs             # strict build (must pass)
+   mkdocs serve                   # preview locally
+   tox -e docs                    # strict build (must pass)
    ```

@@ -6,7 +6,7 @@
 
 An opinionated, modern Python package template that provides:
 
-- A flat package layout with `examples/` and `testing/` helpers.
+- A flat package layout with a `testing/` helpers package.
 - [uv](https://docs.astral.sh/uv/) for dependency management and environments.
 - Strict linting/formatting ([Ruff](https://docs.astral.sh/ruff/)), type
   checking ([mypy](https://mypy.readthedocs.io/) strict), and spell checking
@@ -29,13 +29,12 @@ You can either start from this template or scaffold from scratch with uv.
 
 1. Click **"Use this template"** at the top right of the repo.
 2. Clone your new repo locally.
-3. Delete directories you will not use (e.g. `docs/` if you do not want MkDocs,
-   or `examples/`).
-4. The template uses `foobar` as a placeholder. Find and replace every instance:
+3. Delete directories you will not use (e.g. `docs/` if you do not want MkDocs).
+4. The template uses `pypkg` as a placeholder. Find and replace every instance:
    ```bash
-   git grep -l foobar   # review the matches
+   git grep -l pypkg   # review the matches
    ```
-   Rename the `foobar/` package directory and update `foobar`, `foobar-author`,
+   Rename the `pypkg/` package directory and update `pypkg`, `pypkg-author`,
    and `gpauloski/python-template` throughout (`pyproject.toml`, `mkdocs.yml`,
    docs, workflows, etc.).
 5. Update author, description, and URLs in `pyproject.toml`.
@@ -58,22 +57,23 @@ This project uses [uv](https://docs.astral.sh/uv/). Install it first
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Then set up the environment and git hooks:
+Then create the environment, activate it, and install the git hooks:
 
 ```bash
-uv sync                 # create .venv and install the project + dev tools
-uv run prek install     # install the git pre-commit hooks
+uv sync                       # create .venv and install the project + dev tools
+source .venv/bin/activate     # Windows: .venv\Scripts\activate
+prek install                  # install the git pre-commit hooks
 ```
 
-Common tasks (`uv run` executes inside the managed environment):
+With the environment activated, run tools directly:
 
 ```bash
-uv run pytest                     # run the tests
-uv run prek run --all-files       # run all lint/format/type/spell checks
-uv run mypy .                     # type check
-uv run tox                        # full matrix: py3.10-3.13, prek, docs
-uv run tox -e py313               # a single environment
-uv run mkdocs serve               # preview docs locally (needs the docs group)
+pytest                     # run the tests
+prek run --all-files       # run all lint/format/type/spell checks
+mypy .                     # type check
+tox                        # full matrix: py3.10-3.13, prek, docs
+tox -e py313               # a single environment
+mkdocs serve               # preview docs locally (needs the docs group)
 ```
 
 Install the docs dependency group when working on documentation:
@@ -82,12 +82,15 @@ Install the docs dependency group when working on documentation:
 uv sync --group docs
 ```
 
+If you would rather not activate the environment, prefix any command with
+`uv run` (e.g. `uv run pytest`) to run it inside the managed environment.
+
 ## Installation
 
 Install the released package via pip:
 
 ```bash
-pip install foobar
+pip install pypkg
 ```
 
 ## Repository Setup

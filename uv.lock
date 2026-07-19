@@ -385,66 +385,6 @@ wheels = [
 ]
 
 [[package]]
-name = "foobar"
-source = { editable = "." }
-dependencies = [
-    { name = "requests" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "covdefaults" },
-    { name = "coverage" },
-    { name = "mypy" },
-    { name = "prek" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "ruff" },
-    { name = "tox" },
-    { name = "tox-uv-bare" },
-]
-docs = [
-    { name = "black" },
-    { name = "mike" },
-    { name = "mkdocs-autorefs" },
-    { name = "mkdocs-click" },
-    { name = "mkdocs-gen-files" },
-    { name = "mkdocs-literate-nav" },
-    { name = "mkdocs-material" },
-    { name = "mkdocs-section-index" },
-    { name = "mkdocstrings" },
-    { name = "mkdocstrings-python" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "requests" }]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "covdefaults", specifier = ">=2.2" },
-    { name = "coverage" },
-    { name = "mypy" },
-    { name = "prek" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "ruff", specifier = ">=0.2.0" },
-    { name = "tox", specifier = ">=4.22" },
-    { name = "tox-uv-bare" },
-]
-docs = [
-    { name = "black", specifier = ">=24" },
-    { name = "mike", specifier = ">=2.1" },
-    { name = "mkdocs-autorefs", specifier = ">=1.3" },
-    { name = "mkdocs-click", specifier = ">=0.8" },
-    { name = "mkdocs-gen-files", specifier = ">=0.5" },
-    { name = "mkdocs-literate-nav", specifier = ">=0.6" },
-    { name = "mkdocs-material", specifier = ">=9.5" },
-    { name = "mkdocs-section-index", specifier = ">=0.3" },
-    { name = "mkdocstrings", specifier = ">=0.25" },
-    { name = "mkdocstrings-python", specifier = ">=1.10" },
-]
-
-[[package]]
 name = "ghp-import"
 version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1059,6 +999,66 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f3/91/9c6ee907786a473bf81c5f53cf703ba0957b23ab84c264080fb5a450416f/pyparsing-3.3.2.tar.gz", hash = "sha256:c777f4d763f140633dcb6d8a3eda953bf7a214dc4eff598413c070bcdc117cbc", size = 6851574, upload-time = "2026-01-21T03:57:59.36Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/10/bd/c038d7cc38edc1aa5bf91ab8068b63d4308c66c4c8bb3cbba7dfbc049f9c/pyparsing-3.3.2-py3-none-any.whl", hash = "sha256:850ba148bd908d7e2411587e247a1e4f0327839c40e2e5e6d05a007ecc69911d", size = 122781, upload-time = "2026-01-21T03:57:55.912Z" },
+]
+
+[[package]]
+name = "pypkg"
+source = { editable = "." }
+dependencies = [
+    { name = "requests" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "covdefaults" },
+    { name = "coverage" },
+    { name = "mypy" },
+    { name = "prek" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "ruff" },
+    { name = "tox" },
+    { name = "tox-uv-bare" },
+]
+docs = [
+    { name = "black" },
+    { name = "mike" },
+    { name = "mkdocs-autorefs" },
+    { name = "mkdocs-click" },
+    { name = "mkdocs-gen-files" },
+    { name = "mkdocs-literate-nav" },
+    { name = "mkdocs-material" },
+    { name = "mkdocs-section-index" },
+    { name = "mkdocstrings" },
+    { name = "mkdocstrings-python" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "requests" }]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "covdefaults", specifier = ">=2.2" },
+    { name = "coverage" },
+    { name = "mypy" },
+    { name = "prek" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "ruff", specifier = ">=0.2.0" },
+    { name = "tox", specifier = ">=4.22" },
+    { name = "tox-uv-bare" },
+]
+docs = [
+    { name = "black", specifier = ">=24" },
+    { name = "mike", specifier = ">=2.1" },
+    { name = "mkdocs-autorefs", specifier = ">=1.3" },
+    { name = "mkdocs-click", specifier = ">=0.8" },
+    { name = "mkdocs-gen-files", specifier = ">=0.5" },
+    { name = "mkdocs-literate-nav", specifier = ">=0.6" },
+    { name = "mkdocs-material", specifier = ">=9.5" },
+    { name = "mkdocs-section-index", specifier = ">=0.3" },
+    { name = "mkdocstrings", specifier = ">=0.25" },
+    { name = "mkdocstrings-python", specifier = ">=1.10" },
 ]
 
 [[package]]

@@ -1,19 +1,19 @@
 # Quick Start
 
-foobar brief description.
+pypkg brief description.
 
 ## Overview
 
-foobar detailed overview.
+pypkg detailed overview.
 
 ## Installation
 
 ```bash
-$ pip install foobar
+$ pip install pypkg
 ```
 
 Documentation on installing for local development is provided in [Contributing](contributing/index.md).
 
 ## Usage
 
-foobar usage example.
+pypkg usage example.

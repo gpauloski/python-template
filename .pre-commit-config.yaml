@@ -50,6 +50,8 @@ repos:
 
   # mypy runs in the project's uv environment so it type-checks against the
   # real (locked) dependencies and the strict config in pyproject.toml.
+  # Keep the `uv run` prefix here: git hooks are invoked without an activated
+  # virtualenv, so a bare `mypy` would not resolve.
   - repo: local
     hooks:
       - id: mypy

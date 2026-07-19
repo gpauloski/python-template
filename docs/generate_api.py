@@ -8,7 +8,7 @@ import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 
-PACKAGE_DIR = 'foobar/'
+PACKAGE_DIR = 'pypkg/'
 
 for path in sorted(Path(PACKAGE_DIR).rglob('**/*.py')):
     module_path = path.with_suffix('')

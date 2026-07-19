@@ -6,38 +6,43 @@ summary. `CLAUDE.md` imports this file so there is a single source of truth.
 
 ## Repository Layout
 
-- `foobar/` — the package source (flat layout, **no** `src/`). Avoid writing
+- `pypkg/` — the package source (flat layout, **no** `src/`). Avoid writing
   logic in `__init__.py`.
 - `tests/` — pytest tests. Mirror the package layout; test files end in
-  `_test.py` (e.g. `foobar/x/y.py` → `tests/x/y_test.py`).
+  `_test.py` (e.g. `pypkg/x/y.py` → `tests/x/y_test.py`).
 - `testing/` — shared helpers/fixtures for tests (not tests themselves).
-- `examples/` — runnable example scripts.
 - `docs/` — MkDocs sources. `docs/generate_api.py` auto-generates API pages, so
   do not hand-write `docs/api/`.
 - `.github/workflows/` — CI (tests, prek, docs, publish).
 
-`foobar`, `foobar-author`, and `gpauloski/python-template` are template
+`pypkg`, `pypkg-author`, and `gpauloski/python-template` are template
 placeholders; in a real project they will be replaced with the actual names.
 
 ## Environment & Commands
 
-This project uses [uv](https://docs.astral.sh/uv/). Run tools through `uv run`
-so they execute in the locked environment.
+This project uses [uv](https://docs.astral.sh/uv/). Create the environment and
+activate it once, then invoke tools directly.
 
 ```bash
-uv sync                        # install project + dev group
+uv sync                       # install project + dev group
+source .venv/bin/activate     # Windows: .venv\Scripts\activate
+```
+
+```bash
 uv sync --group docs           # add docs dependencies
-uv run pytest                  # run tests
-uv run pytest tests/x/y_test.py::test_z   # run one test
-uv run prek run --all-files    # run all hooks (lint/format/type/spell)
-uv run mypy .                  # type check
-uv run tox                     # full matrix (py3.10-3.13, prek, docs)
-uv run tox -e py313            # a single environment
+pytest                         # run tests
+pytest tests/x/y_test.py::test_z   # run one test
+prek run --all-files           # run all hooks (lint/format/type/spell)
+mypy .                         # type check
+tox                            # full matrix (py3.10-3.13, prek, docs)
+tox -e py313                   # a single environment
 uv build                       # build sdist + wheel
 ```
 
-Before finishing a change, ensure `uv run prek run --all-files` and
-`uv run pytest` both pass.
+If the environment is not activated, prefix a command with `uv run` (e.g.
+`uv run pytest`) to run it inside the managed environment.
+
+Before finishing a change, ensure `prek run --all-files` and `pytest` both pass.
 
 ## Conventions
 
@@ -56,5 +61,5 @@ Before finishing a change, ensure `uv run prek run --all-files` and
 
 Project skills live in `.claude/skills/`. Available skills: `check` (run the
 full local gate), `release` (cut a release), `rename-template` (replace the
-`foobar` placeholders), and `add-docs-page` (scaffold a docs page). Skills are
+`pypkg` placeholders), and `add-docs-page` (scaffold a docs page). Skills are
 optional helpers — the commands above are always the source of truth.

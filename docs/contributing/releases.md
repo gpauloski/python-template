@@ -1,7 +1,7 @@
 ## Release Timeline
 
 Releases are created on an as-needed basis.
-Milestones are the [Issue Tracker](https://github.com/foobar-author/foobar/issues){target=_blank} are used to track features to be included in upcoming releases.
+Milestones are the [Issue Tracker](https://github.com/pypkg-author/pypkg/issues){target=_blank} are used to track features to be included in upcoming releases.
 
 ## Creating Releases
 
@@ -12,13 +12,13 @@ Milestones are the [Issue Tracker](https://github.com/foobar-author/foobar/issue
    start at 0 and pre-release/post-release/dev-release segments start at 1.
 1. Tag the release commit and push.
    ```bash
-   $ git tag -s v{VERSION} -m "FooBar v{VERSION}"
+   $ git tag -s v{VERSION} -m "pypkg v{VERSION}"
    $ git push origin v{VERSION}
    ```
    Note the version number is prepended by "v" for the tags so tooling can
    distinguish release tags from non-release tags.
 5. Create a new release on GitHub using the tag. The title should be
-   `FooBar v{VERSION}`. Publishing the release triggers the `publish` workflow,
+   `pypkg v{VERSION}`. Publishing the release triggers the `publish` workflow,
    which builds the package and uploads it to PyPI via Trusted Publishing (no
    token required) and deploys the versioned docs. See
    [Repository Setup](repository-setup.md) for the one-time PyPI configuration.

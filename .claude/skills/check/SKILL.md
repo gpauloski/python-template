@@ -7,21 +7,22 @@ description: Run the full local quality gate (prek hooks + tox test matrix) befo
 
 Reproduce what CI runs, in order. Stop and report on the first failure.
 
-1. Sync the environment:
+1. Sync and activate the environment:
    ```bash
    uv sync
+   source .venv/bin/activate
    ```
 2. Run all pre-commit hooks (Ruff, mypy, typos, complexipy, ...):
    ```bash
-   uv run prek run --all-files
+   prek run --all-files
    ```
 3. Run the test suite (fast path — current interpreter):
    ```bash
-   uv run pytest
+   pytest
    ```
 4. Optionally run the full matrix and docs build (slower):
    ```bash
-   uv run tox
+   tox
    ```
 
 Report which steps passed/failed. If a hook auto-fixed files, re-stage them and

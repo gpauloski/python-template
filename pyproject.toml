@@ -3,15 +3,15 @@ requires = ["setuptools>=77.0", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "foobar"
+name = "pypkg"
 authors = [
-    {name = "foobar author", email = "foobar@foobar.com"},
+    {name = "pypkg-author", email = "pypkg-author@example.com"},
 ]
-description = "Foobar example package"
+description = "pypkg example package"
 dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = ["foobar"]
+keywords = ["pypkg"]
 license = "MIT"
 license-files = ["LICENSE"]
 classifiers = [
@@ -24,9 +24,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/foobar-author/foobar"
-Documentation = "https://foobar.readthedocs.io"
-Source = "https://github.com/foobar-author/foobar"
+Homepage = "https://github.com/pypkg-author/pypkg"
+Documentation = "https://pypkg.readthedocs.io"
+Source = "https://github.com/pypkg-author/pypkg"
 
 # Development tooling lives in PEP 735 dependency groups rather than
 # optional-dependencies. uv installs the `dev` group by default (`uv sync`),
@@ -37,16 +37,11 @@ dev = [
     "covdefaults>=2.2",
     "coverage",
     "mypy",
-    # prek is a drop-in, Rust-based replacement for pre-commit. It can also be
-    # installed standalone (`uv tool install prek`); it is listed here so
-    # `uv run prek ...` works out of the box.
     "prek",
     "pytest",
     "pytest-cov",
     "ruff>=0.2.0",
     "tox>=4.22",
-    # tox-uv-bare exposes the uv-backed tox runners without hijacking the
-    # default runner: each env opts in via `runner = uv-venv-lock-runner`.
     "tox-uv-bare",
 ]
 # Lower bounds only; exact versions are pinned in uv.lock for reproducibility.
@@ -64,15 +59,8 @@ docs = [
     "mike>=2.1",
 ]
 
-# Spell checking is handled by crate-ci/typos (see .pre-commit-config.yaml),
-# which respects .gitignore. Exclude the lockfile since its hashes trip up the
-# spell checker. https://github.com/crate-ci/typos
-[tool.typos.files]
-extend-exclude = ["uv.lock"]
-
 [tool.coverage.run]
 plugins = ["covdefaults"]
-omit = ["examples"]
 
 [tool.mypy]
 python_version = "3.10"
@@ -99,7 +87,6 @@ target-version = "py310"
 [tool.ruff.format]
 indent-style = "space"
 quote-style = "single"
-# Enforce Unix (LF) line endings on all formatted files.
 line-ending = "lf"
 
 [tool.ruff.lint]
@@ -132,7 +119,7 @@ inline-quotes = "single"
 
 [tool.ruff.lint.isort]
 force-single-line = true
-known-first-party = ["foobar", "tests", "testing"]
+known-first-party = ["pypkg", "tests", "testing"]
 order-by-type = false
 required-imports = ["from __future__ import annotations"]
 
@@ -152,8 +139,6 @@ required-imports = ["from __future__ import annotations"]
 ]
 "testing/**" = ["S101", "D", "ANN", "PLR2004", "SLF001"]
 "*_test.py" = ["S101", "D", "ANN", "PLR2004", "SLF001"]
-# Example scripts are illustrative: allow prints and a non-package layout.
-"examples/**" = ["INP001", "T201", "S101"]
 # Docs helper scripts are not an importable package.
 "docs/**" = ["INP001"]
 
@@ -163,5 +148,11 @@ convention = "google"
 [tool.setuptools.packages.find]
 exclude = ["tests*", "testing*"]
 namespaces = false
+
+# Spell checking is handled by crate-ci/typos (see .pre-commit-config.yaml),
+# which respects .gitignore. Exclude the lockfile since its hashes trip up the
+# spell checker. https://github.com/crate-ci/typos
+[tool.typos.files]
+extend-exclude = ["uv.lock"]
 
 [tool.setuptools_scm]

@@ -1,11 +1,11 @@
 # Examples
 
-## foobar
+## pypkg
 
-foobar can be used as follows.
+pypkg can be used as follows.
 
 ```python
-from foobar import foo
+from pypkg import foo
 
 foo.bar([1, 2, 3])
 # output: 6
