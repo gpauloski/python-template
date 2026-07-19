@@ -11,6 +11,7 @@ description = "Foobar example package"
 dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.10"
+keywords = ["foobar"]
 license = "MIT"
 license-files = ["LICENSE"]
 classifiers = [
@@ -27,17 +28,25 @@ Homepage = "https://github.com/foobar-author/foobar"
 Documentation = "https://foobar.readthedocs.io"
 Source = "https://github.com/foobar-author/foobar"
 
-[project.optional-dependencies]
+# Development tooling lives in PEP 735 dependency groups rather than
+# optional-dependencies. uv installs the `dev` group by default (`uv sync`),
+# and tox pulls groups in per-environment. Install a group explicitly with
+# `uv sync --group docs`. See https://peps.python.org/pep-0735/.
+[dependency-groups]
 dev = [
     "covdefaults>=2.2",
     "coverage",
     "mypy",
-    "pre-commit",
+    # prek is a drop-in, Rust-based replacement for pre-commit. It can also be
+    # installed standalone (`uv tool install prek`); it is listed here so
+    # `uv run prek ...` works out of the box.
+    "prek",
     "pytest",
     "pytest-cov",
     "ruff>=0.2.0",
-    "tox",
-    "virtualenv",
+    "tox>=4",
+    # tox-uv makes tox build environments with uv for much faster installs.
+    "tox-uv",
 ]
 docs = [
     "black==24.4.2",
