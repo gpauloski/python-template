@@ -79,7 +79,9 @@ python_version = "3.10"
 strict = true
 # Docs helper scripts (e.g. docs/generate_api.py) import mkdocs plugins that are
 # only present in the `docs` dependency group, so exclude them from type checks.
-exclude = ["^docs/"]
+# Also exclude build artifacts so a local `mkdocs build` (site/) does not break
+# `mypy .`.
+exclude = ["^docs/", "^site/", "^build/", "^dist/"]
 
 [[tool.mypy.overrides]]
 # Test code may use untyped defs and untyped decorators (e.g. parametrize).

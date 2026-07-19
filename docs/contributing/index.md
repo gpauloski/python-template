@@ -1,54 +1,46 @@
 ## Getting Started for Local Development
 
-We recommend using [Tox](https://tox.wiki/en/latest/index.html){target=_blank}
-to setup the development environment. This will create a new virtual
-environment with all of the required packages installed
-and FooBar installed in editable mode with the necessary extras options.
+FooBar uses [uv](https://docs.astral.sh/uv/){target=_blank} to manage the
+development environment. First
+[install uv](https://docs.astral.sh/uv/getting-started/installation/){target=_blank},
+then clone the repository and sync the environment.
 
 ```bash
 $ git clone https://github.com/foobar-author/foobar
 $ cd foobar
-$ tox --devenv venv -e py310
-$ . venv/bin/activate
+$ uv sync              # creates .venv with the project + dev dependencies
+$ uv run prek install  # install the git pre-commit hooks
 ```
 
-!!! warning
+`uv sync` installs the `dev` dependency group by default. Add the docs group
+when working on documentation with `#!bash $ uv sync --group docs`.
 
-    Running Tox in a Conda environment is possible but it may conflict with
-    Tox's ability to find the correct Python versions. E.g., if your
-    Conda environment is Python 3.13, running `#!bash $ tox -e p312` may still use
-    Python 3.13.
-
-To install manually:
-```bash
-$ git clone https://github.com/foobar-author/foobar
-$ cd foobar
-$ python -m venv venv
-$ . venv/bin/activate
-$ pip install -e .[dev,docs]
-```
+Prefix commands with `#!bash $ uv run` to execute them inside the managed
+environment (or activate it with `#!bash $ source .venv/bin/activate`).
 
 ## Continuous Integration
 
-FooBar uses [pre-commit](https://pre-commit.com/){target=_blank} and
-[Tox](https://tox.wiki/en/latest/index.html){target=_blank} for continuous integration
-(test, linting, etc.).
+FooBar uses [prek](https://github.com/j178/prek){target=_blank} (a drop-in
+replacement for pre-commit) and
+[Tox](https://tox.wiki/en/latest/index.html){target=_blank} for continuous
+integration (tests, linting, type checking, etc.).
 
-### Linting and Type Checking (pre-commit)
+### Linting and Type Checking (prek)
 
-To use pre-commit, install the hook and then run against files.
+The hooks (Ruff, mypy, typos, complexipy, and more) are configured in
+`.pre-commit-config.yaml`. Run them against all files with:
 
 ```bash
-$ pre-commit install
-$ pre-commit run --all-files
+$ uv run prek run --all-files
 ```
 
 ### Tests (tox)
 
-The entire CI workflow can be run with `#!bash $ tox`.
-This will test against multiple versions of Python and can be slow.
+Tox environments run with uv via `tox-uv`. The entire CI workflow can be run
+with `#!bash $ uv run tox`; this tests against multiple versions of Python and
+can be slow.
 
-Module-level unit-test are located in the `tests/` directory and its
+Module-level unit tests are located in the `tests/` directory and its
 structure is intended to match that of `foobar/`.
 E.g. the tests for `foobar/x/y.py` are located in
 `tests/x/y_test.py`; however, additional test files can be added
@@ -60,26 +52,28 @@ Code that is useful for building tests but is not a test itself belongs in the
 `testing/` directory.
 
 ```bash
-# Run all tests in tests/
-$ tox -e py313
+# Run all tests in a single environment
+$ uv run tox -e py313
 # Run a specific test
-$ tox -e py313 -- tests/x/y_test.py::test_z
+$ uv run tox -e py313 -- tests/x/y_test.py::test_z
+# Or run pytest directly in the current environment
+$ uv run pytest tests/x/y_test.py::test_z
 ```
 
 ## Docs
 
 If code changes require an update to the documentation (e.g., for function
 signature changes, new modules, etc.), the documentation can be built using
-MKDocs.
+MkDocs.
 
 ```bash
-# Manually
-$ pip install -e .[docs]
-$ mkdocs build --strict  # Build only to site/index.html
-$ mkdocs serve           # Serve locally
+# Manually (install the docs dependency group first)
+$ uv sync --group docs
+$ uv run mkdocs build --strict  # Build only to site/index.html
+$ uv run mkdocs serve           # Serve locally
 
 # With tox (will only build, does not serve)
-$ tox -e docs
+$ uv run tox -e docs
 ```
 
 Docstrings are automatically generated, but it is recommended to check the

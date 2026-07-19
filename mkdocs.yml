@@ -118,6 +118,7 @@ nav:
       - contributing/index.md
       - Style Guide: contributing/style-guide.md
       - Issues and Pull Requests: contributing/issues-pull-requests.md
+      - Repository Setup: contributing/repository-setup.md
       - Releases: contributing/releases.md
 
 plugins:

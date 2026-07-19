@@ -32,6 +32,7 @@ htmlcov/
 .pyre/
 .pytype/
 .ruff_cache/
+.complexipy_cache/
 
 # Environments
 # Note: uv.lock IS committed (it pins a reproducible dev environment).

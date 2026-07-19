@@ -18,7 +18,10 @@ Milestones are the [Issue Tracker](https://github.com/foobar-author/foobar/issue
    Note the version number is prepended by "v" for the tags so tooling can
    distinguish release tags from non-release tags.
 5. Create a new release on GitHub using the tag. The title should be
-   `FooBar v{VERSION}`.
+   `FooBar v{VERSION}`. Publishing the release triggers the `publish` workflow,
+   which builds the package and uploads it to PyPI via Trusted Publishing (no
+   token required) and deploys the versioned docs. See
+   [Repository Setup](repository-setup.md) for the one-time PyPI configuration.
 6. **Official release:**
     1. Use the "Generate release notes" option and set the previous tag as the previous official release tag. E.g., for `v0.4.1`, the previous release tag should be `v0.4.0` and NOT `v0.4.1a1`.
     2. Add an "Upgrade Steps" section at the top (see previous releases for examples).
