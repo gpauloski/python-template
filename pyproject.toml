@@ -61,15 +61,11 @@ docs = [
     "mike==2.1.3",
 ]
 
-[tool.codespell]
-skip = """
-.git,
-.github,
-__pycache__,
-build,
-dist,
-.*egg-info
-"""
+# Spell checking is handled by crate-ci/typos (see .pre-commit-config.yaml),
+# which respects .gitignore. Exclude the lockfile since its hashes trip up the
+# spell checker. https://github.com/crate-ci/typos
+[tool.typos.files]
+extend-exclude = ["uv.lock"]
 
 [tool.coverage.run]
 plugins = ["covdefaults"]
@@ -117,6 +113,10 @@ ignore = [
     "D213", # multi-line-summary-second-line (conflicts with D212)
     # Do not require a copyright notice at the top of every file.
     "CPY001",
+    # Code complexity is enforced by the complexipy pre-commit hook (cognitive
+    # complexity), so disable Ruff's overlapping complexity checks.
+    "C901",    # mccabe complex-structure
+    "PLR0912", # too-many-branches
 ]
 
 [tool.ruff.lint.flake8-pytest-style]

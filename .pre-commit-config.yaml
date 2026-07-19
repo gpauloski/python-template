@@ -1,32 +1,61 @@
+# Managed with prek (https://github.com/j178/prek), a fast drop-in replacement
+# for pre-commit that reads this same config file. Install the git hooks with
+# `prek install` and run against everything with `prek run --all-files`.
+#
+# The `ci:` block below is only consumed by https://pre-commit.ci. prek ignores
+# it. Autoupdates are handled by the prek-autoupdate GitHub Actions workflow.
 ci:
   autofix_prs: false
+
 repos:
-  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: mixed-line-ending
+        args: [--fix=lf]
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-added-large-files
+      - id: check-case-conflict
       - id: check-docstring-first
       - id: check-json
+      - id: check-toml
       - id: check-yaml
       - id: check-merge-conflict
+      - id: debug-statements
       - id: name-tests-test
-  - repo: 'https://github.com/codespell-project/codespell'
-    rev: v2.4.2
+      # Uncomment to forbid blanket `# noqa` / `# type: ignore` comments:
+      # - id: python-check-blanket-noqa
+      # - id: python-check-blanket-type-ignore
+
+  # Spell checker. Replaces codespell; faster and lower false-positive rate.
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.48.0
     hooks:
-      - id: codespell
-  - repo: 'https://github.com/astral-sh/ruff-pre-commit'
-    rev: v0.15.21
+      - id: typos
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.22
     hooks:
       - id: ruff-check
-        args:
-          - '--fix'
-          - '--exit-non-zero-on-fix'
+        args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
-  - repo: 'https://github.com/pre-commit/mirrors-mypy'
-    rev: v2.3.0
+
+  # Cognitive-complexity gate. Complements Ruff (whose overlapping complexity
+  # rules are disabled in pyproject.toml).
+  - repo: https://github.com/rohaquinlop/complexipy-pre-commit
+    rev: v5.1.0
+    hooks:
+      - id: complexipy
+
+  # mypy runs in the project's uv environment so it type-checks against the
+  # real (locked) dependencies and the strict config in pyproject.toml.
+  - repo: local
     hooks:
       - id: mypy
-        additional_dependencies: []
+        name: mypy
+        entry: uv run mypy .
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
