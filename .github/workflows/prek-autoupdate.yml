@@ -35,7 +35,7 @@ jobs:
         run: uv run prek autoupdate
 
       - name: Open a pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "[prek] autoupdate hooks"
           title: "[prek] autoupdate hooks"
