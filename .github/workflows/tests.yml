@@ -10,6 +10,12 @@ on:
 permissions:
   contents: read
 
+env:
+  # Force uv to install a managed interpreter rather than reusing the runner's
+  # preinstalled system Python. Without this there is nothing for
+  # `cache-python` to save and the cache step warns and no-ops.
+  UV_PYTHON_PREFERENCE: only-managed
+
 jobs:
   tests:
     timeout-minutes: 10

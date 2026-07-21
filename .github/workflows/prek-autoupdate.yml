@@ -31,9 +31,21 @@ jobs:
       - name: Install the project
         run: uv sync
 
+      # The diff makes runs self-documenting: when no hooks changed the next
+      # step is a no-op ("Branch ... is not ahead of base") and the log would
+      # otherwise give no indication of why no pull request was opened.
       - name: Run prek autoupdate
-        run: uv run prek autoupdate
+        run: |
+          uv run prek autoupdate
+          git --no-pager diff -- .pre-commit-config.yaml
 
+      # Requires "Allow GitHub Actions to create and approve pull requests"
+      # under Settings > Actions > General (and the same setting at the org
+      # level, if the repo belongs to one). Without it this step fails with
+      # "GitHub Actions is not permitted to create or approve pull requests".
+      # Note that pull requests opened with the default GITHUB_TOKEN do not
+      # trigger other workflows; pass `token:` a PAT if the autoupdate PR
+      # should run the tests and prek workflows.
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v8
         with:
