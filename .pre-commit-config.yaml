@@ -35,7 +35,7 @@ repos:
       - id: typos
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.2
+    rev: v0.16.3
     hooks:
       - id: ruff-check
         args: [--fix, --exit-non-zero-on-fix]
@@ -44,7 +44,7 @@ repos:
   # Cognitive-complexity gate. Complements Ruff (whose overlapping complexity
   # rules are disabled in pyproject.toml).
   - repo: https://github.com/rohaquinlop/complexipy-pre-commit
-    rev: v6.2.0
+    rev: v7.0.1
     hooks:
       - id: complexipy
 
